@@ -10,7 +10,6 @@ namespace KHAS {
 	enum class Commands {
 		AddingAPair
 		, DeletingAPair
-		, RemovingAPair
 		, SetNewSET
 		, Exit
 		, Unknown

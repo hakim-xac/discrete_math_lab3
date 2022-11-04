@@ -20,9 +20,6 @@ namespace KHAS {
         void deletingAPairFromASet(TType lenght_col);
 
         template<typename TType>
-        void removingAPairFromASet(TType lenght_col);
-
-        template<typename TType>
         TType inputPowerSet();
 
         template <typename TPower>
@@ -40,41 +37,7 @@ namespace KHAS {
         template <typename TType>
         void applyPairs(TType lenght_col);
 
-        template <typename TType>
-        void printProperties(TType lenght_col);
-
-        template <typename TType>
-        void printIsReflexive(TType lenght_col);
-
-        template <typename TType>
-        void printIsAntiReflexive(TType lenght_col);
-
-        template <typename TType>
-        void printIsSymmetry(TType lenght_col);
-
-        template <typename TType>
-        void printIsAntiSymmetry(TType lenght_col);
-
-        template <typename TType>
-        void printIsTransitivity(TType lenght_col);
-
-        template <typename TType>
-        bool isReflexive(TType lenght_col);
-
-        template <typename TType>
-        bool isAntiReflexive(TType lenght_col);
-
-        template <typename TType>
-        bool isSymmetry(TType lenght_col);
-
-        template <typename TType>
-        bool isAntiSymmetry(TType lenght_col);
-
-        template <typename TType>
-        bool isTransitivity(TType lenght_col);
-
-
-
+    private:
 
     public:
         void loop() override;

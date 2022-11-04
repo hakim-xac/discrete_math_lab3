@@ -56,7 +56,7 @@ namespace KHAS {
     {
         using T = std::decay_t<TInput>;
 
-        T tmp;
+        T tmp{};
         std::cin >> tmp;
 
         if (awiv == ActionWithInputValue::ErrorReturn) {
@@ -83,12 +83,12 @@ namespace KHAS {
     }
 
     template <typename TValue, typename TLower, typename THight>
-    inline constexpr auto CommonInterface::clamp(TValue&& v, TLower&& lo, THight&& hi) {
+    inline constexpr auto CommonInterface::clamp(TValue&& v, TLower&& lo, THight&& hi) const noexcept {
         return clamp(std::forward<TValue>(v), std::forward<TLower>(lo), std::forward<THight>(hi), std::less{});
     }
 
     template <typename TValue, typename TLower, typename THight, typename Compare>
-    inline constexpr auto CommonInterface::clamp(TValue&& v, TLower&& lo, THight&& hi, Compare comp) {
+    inline constexpr auto CommonInterface::clamp(TValue&& v, TLower&& lo, THight&& hi, Compare comp) const noexcept {
         auto value{ std::forward<TValue>(v) };
         auto lower{ std::forward<TLower>(lo) };
         auto hight{ std::forward<THight>(hi) };
@@ -96,12 +96,20 @@ namespace KHAS {
     }
 
     template <typename TValue, typename TLower, typename THight>
-    inline constexpr bool CommonInterface::isClamp(TValue&& v, TLower&& lo, THight&& hi) const {
+    inline constexpr bool CommonInterface::isClamp(TValue&& v, TLower&& lo, THight&& hi) const noexcept {
         auto value{ std::forward<TValue>(v) };
         auto lower{ std::forward<TLower>(lo) };
         auto hight{ std::forward<THight>(hi) };
         return value >= lower && value <= hight;
-    }    
+    }
+
+    template <typename TValue, typename TLower, typename THight, typename Compare>
+    constexpr bool CommonInterface::isClamp(TValue&& v, TLower&& lo, THight&& hi, Compare comp) const noexcept {
+        auto value{ std::forward<TValue>(v) };
+        auto lower{ std::forward<TLower>(lo) };
+        auto hight{ std::forward<THight>(hi) };
+        return comp(value, lower) && comp(hight, value);
+    }
     
     
 }

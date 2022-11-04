@@ -7,7 +7,6 @@
 
 namespace KHAS {
 
-
     void Interface::loop()
     {
         setlocale(LC_ALL, "Russian");
@@ -23,14 +22,14 @@ namespace KHAS {
             {
             case KHAS::Commands::AddingAPair:
             {
+                base_vec_.clear();
+                base_vec_.resize(power * power, Type{});
                 pairsInput(power);
                 applyPairs(power);
                 printMatrix(power);
-                printProperties(power);
             }
                 break;
             case KHAS::Commands::DeletingAPair:     deletingAPairFromASet(power); break;
-            case KHAS::Commands::RemovingAPair:     removingAPairFromASet(power); break;
             case KHAS::Commands::Unknown:           printUnknown(); break;
             case KHAS::Commands::SetNewSET:         power = inputPowerSet<Type>();
             case KHAS::Commands::None:
@@ -42,7 +41,6 @@ namespace KHAS {
                 base_set_.reserve(power);
                 pairs_.reserve(power * power);
                 base_vec_.resize(power * power, Type{});
-                //inputElemsSet(power);
                 pairsInput(power);
                 applyPairs(power); 
             }
@@ -50,7 +48,6 @@ namespace KHAS {
             }            
 
             printMatrix(power);
-            printProperties(power);
             printMenu();
 
             activeCommand = selectCommand();

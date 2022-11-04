@@ -62,15 +62,19 @@ namespace KHAS {
 
         //*  */
         template <typename TValue, typename TLower, typename THight>
-        constexpr auto clamp(TValue&& v, TLower&& lo, THight&& hi);
+        constexpr auto clamp(TValue&& v, TLower&& lo, THight&& hi) const noexcept;
 
         //*  */
         template <typename TValue, typename TLower, typename THight, typename Compare>
-        constexpr auto clamp(TValue&& v, TLower&& lo, THight&& hi, Compare comp);
+        constexpr auto clamp(TValue&& v, TLower&& lo, THight&& hi, Compare comp) const noexcept;
 
         //*  */
         template <typename TValue, typename TLower, typename THight>
-        constexpr bool isClamp(TValue&& v, TLower&& lo, THight&& hi) const;
+        constexpr bool isClamp(TValue&& v, TLower&& lo, THight&& hi) const noexcept;
+
+        //*  */
+        template <typename TValue, typename TLower, typename THight, typename Compare>
+        constexpr bool isClamp(TValue&& v, TLower&& lo, THight&& hi, Compare comp) const noexcept;
 
 
 

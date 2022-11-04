@@ -25,7 +25,6 @@ namespace KHAS {
         push(delimiter('-'));
         push(stringGeneration(' ', "[ 1 ]", "    ", "", "", "", "", "Добавить пару"));
         push(stringGeneration(' ', "[ 2 ]", "    ", "", "", "", "", "Удалить пару"));
-        push(stringGeneration(' ', "[ 3 ]", "    ", "", "", "", "", "Изменить пару"));
         push(stringGeneration(' ', "[ 5 ] ", "", "", "", "", "", "Задать новое множество"));
         push(stringGeneration(' ', "[ 0 ]", "            ", "", "", "", "", "Выход"));
         push(delimiter('='));
@@ -48,7 +47,6 @@ namespace KHAS {
         static std::unordered_map<int, Commands> base{
             { 1, Commands::AddingAPair }
             , { 2, Commands::DeletingAPair }
-            , { 3, Commands::RemovingAPair }
             , { 5, Commands::SetNewSET }
             , { 0, Commands::Exit }
         };
@@ -64,9 +62,6 @@ namespace KHAS {
 
             break;
         case Commands::DeletingAPair:
-
-            break;
-        case Commands::RemovingAPair:
 
             break;
         case Commands::SetNewSET:

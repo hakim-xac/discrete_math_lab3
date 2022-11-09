@@ -87,7 +87,7 @@ namespace KHAS {
     void Interface::pairsInput(PowerType power)
     {
 
-        using value_type = PowerType;
+        using value_type = int;
 
 
         push(delimiter('='));
@@ -132,106 +132,4 @@ namespace KHAS {
         pairs_.shrink_to_fit();
     }
 
-    template <typename TType>
-    void Interface::printMatrix(TType lenght_col)
-    {
-        using value_type = decltype(base_vec_)::value_type;
-
-        std::stringstream ss;
-
-        push(delimiter('='));
-        push(stringGeneration(' ', "Вывод матрицы смежности"));
-        push(delimiter('-'));
-
-        for (value_type i{}, ie{ lenght_col }; i != ie; ++i) ss << std::setw(4) << "|" << std::setw(4) << "#" << i + 1;
-        push(stringGeneration(' ', ss.str()));
-        ss.str("");
-        for (value_type i{}, ie{ lenght_col }; i != ie; ++i) ss << std::setw(4) << "-" << std::setw(4) << "-" << "-";
-        push(stringGeneration(' ', ss.str()));
-        ss.str("");
-
-        for (value_type i{}, ie{ base_vec_.size() }; i != ie; ++i) {
-            ss << std::setw(4) << "|" << std::setw(4) << base_vec_[i] << " ";
-            if ((i + 1) % lenght_col == 0) {
-                push(stringGeneration(' ', ss.str()));
-                ss.str("");
-            }
-        }
-        flush();
-
-    }
-
-    template <typename TType>
-    void Interface::applyPairs(TType lenght_col) {
-
-        for (auto&& pair : pairs_) {
-            auto row{ pair.first - 1 };
-            auto col{ pair.second - 1 };
-
-            auto pos{ row * lenght_col + col };
-            auto reverse_pos{ col * lenght_col + row };
-
-            assert(base_vec_.size() > pos);
-            assert(base_vec_.size() > reverse_pos);
-            ++base_vec_[pos];
-            ++base_vec_[reverse_pos];
-        }
-    }
-
-    template<typename TType>
-    void Interface::deletingAPairFromASet(TType lenght_col) {
-
-        using value_type = typename decltype(base_vec_)::value_type;
-
-        push(delimiter('='));
-        push(stringGeneration(' ', "Удаление пары:"));
-        push(delimiter('-'));
-
-        value_type first{}, second{};
-        bool is_first{}, is_second{};
-        do {
-            push(stringGeneration(' ', "Введите 1 элемент пары:"));
-            push(delimiter('-'));
-            flush();
-            std::tie(first, is_first) = dataInput<value_type>(ActionWithInputValue::LoopIsError);
-            push(delimiter('-'));
-            push(stringGeneration(' ', "Введите 2 элемент пары:"));
-            push(delimiter('-'));
-            flush();
-            std::tie(second, is_second) = dataInput<value_type>(ActionWithInputValue::LoopIsError);
-            if (!(is_first && is_second)) {
-                push(delimiter('-'));
-                push(stringGeneration(' ', "Ошибка! Повторите ввод!"));
-                push(delimiter('-'));
-                flush();
-            }
-        } while (!(is_first && is_second));
-
-        auto fn{ std::find(std::begin(pairs_), std::end(pairs_), std::make_pair(first, second)) };
-        if (fn == std::end(pairs_)) {
-            push(delimiter('-'));
-            push(stringGeneration(' ', "Ошибка! Данная пара отсутствует!"));
-            push(delimiter('-'));
-            flush();
-            return;
-        }
-
-        auto row{ first - 1 };
-        auto col{ second - 1 };
-
-        auto pos{ row * lenght_col + col };
-        auto reverse_pos{ col * lenght_col + row };
-
-        assert(base_vec_.size() > pos);
-        assert(base_vec_.size() > reverse_pos);
-
-        if(base_vec_[pos])          --base_vec_[pos];
-        if(base_vec_[reverse_pos])  --base_vec_[reverse_pos];
-        if(base_vec_[pos] == 0)     pairs_.erase(fn, std::end(pairs_));
-
-        push(delimiter('-'));
-        push(stringGeneration(' ', "Данная пара (" + std::to_string(first) + ", " + std::to_string(second) + ") успешно удалена! "));
-        push(delimiter('-'));
-        flush();
-    }
 }

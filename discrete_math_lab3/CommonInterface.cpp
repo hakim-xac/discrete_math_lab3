@@ -9,9 +9,9 @@ namespace KHAS {
     {
         push(delimiter('='));
         push(stringGeneration(' ', "Дисциплина:", "", "", "", "", "Дискретная математика"));
-        push(stringGeneration(' ', "Лабораторня работа:", "", "", "", "", "", "№ 1"));
+        push(stringGeneration(' ', "Лабораторня работа:", "", "", "", "", "", "№ 3"));
         push(delimiter('-'));
-        push(stringGeneration(' ', "Тема:", "", "", "", "", "Отношения и их свойства"));
+        push(stringGeneration(' ', "Тема:", "", "", "", "", "Поиск компонент связности графа"));
         push(stringGeneration(' ', "Выполнил студент:", "", "", "", "", "Хакимов А.С."));
         push(delimiter('='));
 

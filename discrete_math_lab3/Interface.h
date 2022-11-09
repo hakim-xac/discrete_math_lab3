@@ -3,6 +3,7 @@
 #include "CommonInterface.h"
 #include <iostream>
 #include <unordered_set>
+#include <vector>
 #include <sstream>
 
 namespace KHAS {
@@ -12,12 +13,13 @@ namespace KHAS {
         using Type = size_t;
         std::unordered_set<Type> base_set_;
         std::vector<std::pair<Type, Type>> pairs_;
-        std::vector<Type> base_vec_;
+
+        std::vector < std::vector<Type>> base_vec_;
+        std::vector<Type> vec_bool_;
+
 
     private:
 
-        template<typename TType>
-        void deletingAPairFromASet(TType lenght_col);
 
         template<typename TType>
         TType inputPowerSet();
@@ -31,14 +33,14 @@ namespace KHAS {
         template <typename PowerType>
         void pairsInput(PowerType power);
 
-        template <typename TType>
-        void printMatrix(TType lenght_col);
 
-        template <typename TType>
-        void applyPairs(TType lenght_col);
 
     private:
-
+        void deletingAPairFromASet();
+        void printMatrix();
+        void applyPairs();
+        void searchForAll(size_t power);
+        void searchForOne(size_t elem, size_t power, std::ostream& ss);
     public:
         void loop() override;
 
@@ -49,7 +51,10 @@ namespace KHAS {
             : CommonInterface(table_width, out)
             , base_set_() 
             , pairs_()
-            , base_vec_() {};
+            , base_vec_()
+            , vec_bool_() {
+        
+        };
     };
 
 }
